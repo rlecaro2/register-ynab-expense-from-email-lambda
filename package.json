@@ -1,0 +1,32 @@
+{
+  "name": "register-ynab-expense-from-email",
+  "version": "1.0.0",
+  "description": "Register an email expense report into YNAB",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "build": "webpack --mode production",
+    "clean": "rm -rf dist/ && rm dist.zip"
+  },
+  "keywords": [
+    "aws-lambda",
+    "ynab",
+    "node",
+    "aws-ses"
+  ],
+  "author": "Rafael Lecaros <rafael.lecaros@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "babel-loader": "^8.0.4",
+    "clean-webpack-plugin": "^1.0.0",
+    "webpack": "^4.28.2",
+    "webpack-cli": "^3.1.2",
+    "zip-webpack-plugin": "^3.0.0"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.382.0"
+  }
+}
