@@ -1,8 +1,12 @@
-import getEmail from './get-email';
+const handler = require('./handler');
+const getEmail = require('./get-email');
 
-exports.handler = async function (event, context, callback) {
+async function processEmail (event) {
   const emailBody = await getEmail(event);
   console.log('Got email body ' + emailBody);
   // TODO: parse
   // TODO: send to YNAB
 };
+
+// Wrap execution in handler
+exports.handler = handler(processEmail);
