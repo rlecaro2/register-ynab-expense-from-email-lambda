@@ -14,12 +14,10 @@ module.exports = async function getEmailBody(event) {
     const emailData = await s3.getObject({
       Bucket: bucketName,
       Key: sesNotification.mail.messageId
-    }).promise();
+    })
+    .promise();
 
-    console.log('email data:\n' + emailData);
-    console.log('Raw email:\n' + emailData.Body);
-
-    return emailData.Body;
+    return emailData.Body.toString('utf8'); // body is a buffer
   } catch (error) {
     console.log(error, error.stack);
   }

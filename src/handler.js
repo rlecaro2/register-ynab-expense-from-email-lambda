@@ -1,7 +1,8 @@
 // see: http://thecodebarbarian.com/bundling-a-node-js-function-for-aws-lambda-with-webpack
 module.exports = fn => function(event, context, callback) {
-  fn(event).
-    then(res => {
+  console.log('Lambda called');
+  fn(event)
+    .then(res => {
       callback(null, {
         statusCode: 200,
         headers: {

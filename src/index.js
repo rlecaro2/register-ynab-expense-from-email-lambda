@@ -1,11 +1,11 @@
 const handler = require('./handler');
 const getEmail = require('./get-email');
+const parseEmail = require('./parse-email');
 
 async function processEmail (event) {
   const emailBody = await getEmail(event);
-  console.log('Got email body ' + emailBody);
-  // TODO: parse
-  // TODO: send to YNAB
+  const emailData  = parseEmail(emailBody);
+  // TODO: send to YNAB https://api.youneedabudget.com/
 };
 
 // Wrap execution in handler
