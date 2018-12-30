@@ -15,40 +15,34 @@ function getMatch(message, regex, getFull = false) {
  * @returns {object} amount, commerce, type, currency, etc
  */
 module.exports = function parseEmail(body = '') {
-  try {
-    const messageRegex = /Estimado[\S,\s]*(?=(\d\.))/; // until a digit is with a .
-    const message = getMatch(body, messageRegex);
+  const messageRegex = /Estimado[\S,\s]*(?=(\d\.))/; // until a digit is with a .
+  const message = getMatch(body, messageRegex);
 
-    console.log('extracted Message', message);
+  const dateRegex = /\d{1,2}\/\d{1,2}\/\d{4}/;
+  const date = getMatch(message, dateRegex);
 
-    const dateRegex = /\d{1,2}\/\d{1,2}\/\d{4}/;
-    const date = getMatch(message, dateRegex);
+  const timeRegex = /(\d{1,2}:\d{1,2}) hrs/;
+  const [, time] = getMatch(message, timeRegex);
 
-    const timeRegex = /\d{1,2}:\d{1,2} hrs/;
-    const time = getMatch(message, timeRegex);
+  const purchaseTypeRegex = /COMPRA.+?(?= )/;
+  const purchaseType = getMatch(message, purchaseTypeRegex);
 
-    const purchaseTypeRegex = /COMPRA.+?(?= )/;
-    const purchaseType = getMatch(message, purchaseTypeRegex);
+  const commerceRegex = /en ([\S,\s]*) (?=con)/;
+  const [, commerce] = getMatch(message, commerceRegex, true);
 
-    const commerceRegex = /en ([a-z,A-Z].*)/;
-    const [, commerce] = getMatch(message, commerceRegex, true);
+  const cardRegex = /Tarjeta de Credito.+?(\d{4})/;
+  const [, cardNumber] = getMatch(message, cardRegex, true);
 
-    const cardRegex = /Tarjeta de Credito.+?(\d{4})/;
-    const [, cardNumber] = getMatch(message, cardRegex, true);
+  const currencyAmountRegex = /(USD|CLP)(.+?(?=\.))/;
+  const [, currency, amount] = getMatch(message, currencyAmountRegex, true);
 
-    const currencyAmountRegex = /(USD|CLP)(.+?(?=\.))/;
-    const [, currency, amount] = getMatch(message, currencyAmountRegex, true);
-
-    return {
-      date,
-      time,
-      purchaseType,
-      commerce,
-      cardNumber,
-      currency,
-      amount
-    };
-  } catch (error) {
-    console.log(error);
-  }
+  return {
+    date,
+    time,
+    purchaseType,
+    commerce,
+    cardNumber,
+    currency,
+    amount,
+  };
 };
