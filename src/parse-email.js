@@ -15,25 +15,26 @@ function getMatch(message, regex, getFull = false) {
  * @returns {object} amount, commerce, type, currency, etc
  */
 module.exports = function parseEmail(body = '') {
-  const messageRegex = /Estimado[\S,\s]*(?=(\d\.))/; // until a digit is with a .
+  const messageRegex = /Estimado[\S,\s]*?(?=\n\n)/; // until a digit is with a .
   const message = getMatch(body, messageRegex);
+  console.log('message is ', message);
 
   const dateRegex = /\d{1,2}\/\d{1,2}\/\d{4}/;
   const date = getMatch(message, dateRegex);
 
   const timeRegex = /(\d{1,2}:\d{1,2}) hrs/;
-  const [, time] = getMatch(message, timeRegex);
+  const [, time] = getMatch(message, timeRegex, true);
 
   const purchaseTypeRegex = /COMPRA.+?(?= )/;
   const purchaseType = getMatch(message, purchaseTypeRegex);
 
-  const commerceRegex = /en ([\S,\s]*) (?=con)/;
+  const commerceRegex = /en ([\S,\s]*?)(?=con su)/;
   const [, commerce] = getMatch(message, commerceRegex, true);
 
   const cardRegex = /Tarjeta de Credito.+?(\d{4})/;
   const [, cardNumber] = getMatch(message, cardRegex, true);
 
-  const currencyAmountRegex = /(USD|CLP)(.+?(?=\.))/;
+  const currencyAmountRegex = /(USD|CLP) (.+?(?=\.))/;
   const [, currency, amount] = getMatch(message, currencyAmountRegex, true);
 
   return {

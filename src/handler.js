@@ -1,7 +1,6 @@
 /* eslint-disable */
 // see: http://thecodebarbarian.com/bundling-a-node-js-function-for-aws-lambda-with-webpack
 module.exports = fn => function(event, context, callback) {
-  console.log('Lambda called');
   fn(event)
     .then(res => {
       callback(null, {

@@ -7,12 +7,14 @@ const { DateTime } = require('luxon');
  * @param {string} args.time  eg: 21:34
  */
 module.exports = function parseDate({ date, time }) {
-  return DateTime
+  const formatted = DateTime
     .fromFormat(
       `${date} ${time}`,
-      'dd/MM/YYYY HH:mm',
+      'dd/MM/yyyy HH:mm',
       { zone: 'America/Santiago' },
     )
     .toUTC()
     .toISO();
+
+  return formatted;
 };

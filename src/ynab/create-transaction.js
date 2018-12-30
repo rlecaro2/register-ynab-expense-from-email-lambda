@@ -3,9 +3,10 @@ const parseAmount = require('./parse-amount');
 const parseDate = require('./parse-date');
 
 const accessToken = process.env.YNAB_API_KEY;
+const ynab = new Ynab.API(accessToken);
+
 const budgetId = process.env.YNAB_BUDGET_ID;
 const accountId = process.env.YNAB_ACCOUNT_ID;
-const ynab = new Ynab.API(accessToken);
 
 /**
  * @typedef Transaction
@@ -43,11 +44,13 @@ module.exports = async function createTransaction({
   const memo = `${currency} ${amount} en ${commerce}`;
 
   const transaction = {
-    amount_id: accountId,
+    account_id: accountId,
     date: parseDate({ date, time }),
     amount: parseAmount({ amount, currency }),
     memo,
   };
+
+  console.log('About to create transaction!', JSON.stringify(transaction));
 
   return ynab.transactions.createTransaction(budgetId, { transaction });
 };
