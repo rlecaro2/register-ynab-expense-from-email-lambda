@@ -50,7 +50,5 @@ module.exports = async function createTransaction({
     memo,
   };
 
-  console.log('About to create transaction!', JSON.stringify(transaction));
-
   return ynab.transactions.createTransaction(budgetId, { transaction });
 };

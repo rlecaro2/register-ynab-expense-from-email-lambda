@@ -4,7 +4,7 @@
   "description": "Register an email expense report into YNAB",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint --report-unused-disable-directives src/**.js",
+    "lint": "eslint --report-unused-disable-directives src/**",
     "clean": "(rm -rf dist/ && rm dist.zip) || :",
     "test": "test",
     "build": "webpack --mode production",

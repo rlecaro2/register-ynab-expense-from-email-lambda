@@ -15,9 +15,9 @@ function getMatch(message, regex, getFull = false) {
  * @returns {object} amount, commerce, type, currency, etc
  */
 module.exports = function parseEmail(body = '') {
-  const messageRegex = /Estimado[\S,\s]*?(?=\n\n)/; // until a digit is with a .
+  // Si necesita... is the footer
+  const messageRegex = /Estimado[\S,\s]*?(?=Si necesita)/;
   const message = getMatch(body, messageRegex);
-  console.log('message is ', message);
 
   const dateRegex = /\d{1,2}\/\d{1,2}\/\d{4}/;
   const date = getMatch(message, dateRegex);

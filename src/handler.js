@@ -15,3 +15,5 @@ module.exports = fn => function(event, context, callback) {
     }).
     catch(error => callback(error));
 };
+
+/* eslint-enable */

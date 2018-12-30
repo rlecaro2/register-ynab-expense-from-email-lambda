@@ -24,12 +24,11 @@ function parsePesos(amount) {
 }
 
 module.exports = function parseAmount({ amount, currency }) {
-  console.log('parsing', amount, currency);
   switch (currency) {
     case Currencies.USD:
-      return parseDollars(amount);
+      return -1 * parseDollars(amount);
     case Currencies.CLP:
     default:
-      return parsePesos(amount);
+      return -1 * parsePesos(amount);
   }
 };
