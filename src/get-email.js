@@ -3,7 +3,7 @@ const AWS = require('aws-sdk');
 AWS.config.setPromisesDependency(Promise);
 const s3 = new AWS.S3();
 
-const bucketName = 'rafalecaros-mail/ynab-integration-visa-bci';
+const bucketName = 'rafalecaros-mail/ynab-integration-visa-bci'; // TODO: change based on email
 
 module.exports = async function getEmailBody(event) {
   const sesNotification = event.Records[0].ses;
