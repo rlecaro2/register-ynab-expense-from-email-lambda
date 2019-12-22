@@ -6,7 +6,7 @@ const accessToken = process.env.YNAB_API_KEY;
 const ynab = new Ynab.API(accessToken);
 
 const budgetId = process.env.YNAB_BUDGET_ID;
-const accountId = process.env.YNAB_ACCOUNT_ID;
+const accountId = process.env.YNAB_ACCOUNT_ID; // TODO: change based on email
 
 /**
  * @typedef Transaction
@@ -24,23 +24,17 @@ const accountId = process.env.YNAB_ACCOUNT_ID;
  */
 
 /**
-  * Creates a transaction in YNAB
-  * @param {object} transactionData
-  * @param {string} transactionData.date
-  * @param {string} transactionData.time
-  * @param {string} transactionData.amount
-  * @param {string} transactionData.purchaseType
-  * @param {string} transactionData.commerce
-  * @param {string} transactionData.cardNumber
-  * @param {string} transactionData.currency
-  */
-module.exports = async function createTransaction({
-  date,
-  time,
-  amount,
-  commerce,
-  currency,
-}) {
+ * Creates a transaction in YNAB
+ * @param {object} transactionData
+ * @param {string} transactionData.date
+ * @param {string} transactionData.time
+ * @param {string} transactionData.amount
+ * @param {string} transactionData.purchaseType
+ * @param {string} transactionData.commerce
+ * @param {string} transactionData.cardNumber
+ * @param {string} transactionData.currency
+ */
+module.exports = async function createTransaction({ date, time, amount, commerce, currency }) {
   const memo = `${currency} ${amount} en ${commerce}`;
 
   const transaction = {

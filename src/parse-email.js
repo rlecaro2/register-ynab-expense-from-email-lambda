@@ -1,4 +1,3 @@
-
 function getMatch(message, regex, getFull = false) {
   const maybeValue = message.match(regex);
   if (getFull) return maybeValue || [];
@@ -27,11 +26,9 @@ function getCurrencyAmountRegex(message) {
  * @returns {object} amount, commerce, type, currency, etc
  */
 module.exports = function parseEmail(body = '') {
-  console.log('Parsing email...');
   // Si necesita... is the footer
   const messageRegex = /Estimado[\S,\s]*?(?=Si necesita)/;
   const message = getMatch(body, messageRegex);
-  console.log(`Extracted: ${message}`);
 
   const dateRegex = /\d{1,2}\/\d{1,2}\/\d{4}/;
   const date = getMatch(message, dateRegex);
