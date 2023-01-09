@@ -44,7 +44,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
     "aws-sdk": "^2.918.0",
-    "luxon": "^1.27.0",
+    "luxon": "^2.5.2",
     "ynab": "^1.25.0"
   }
 }
